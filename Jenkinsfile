@@ -32,27 +32,27 @@ pipeline {
                     'spring boot application': {
                         script {
                             dir('offers-microservice-spring-boot') {
-                                def mvn = tool 'maven3';
+                                def mvnHome = '/opt/maven'
                                 withSonarQubeEnv('sonar-pro') {
-                                    sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=offers-spring-boot -Dsonar.projectName=offers-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
+                                    sh "${mvnHome}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=offers-spring-boot -Dsonar.projectName=offers-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                             dir('shoes-microservice-spring-boot') {
-                                def mvn = tool 'maven3';
+                                def mvnHome = '/opt/maven'
                                 withSonarQubeEnv('sonar-pro') {
-                                    sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=shoe-spring-boot -Dsonar.projectName=shoes-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
+                                    sh "${mvnHome}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=shoe-spring-boot -Dsonar.projectName=shoes-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                             dir('zuul-api-gateway') {
-                                def mvn = tool 'maven3';
+                                def mvnHome = '/opt/maven'
                                 withSonarQubeEnv('sonar-pro') {
-                                    sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=zuul-api -Dsonar.projectName=zuul-api -Dsonar.login=${env.SONARQUBE_TOKEN}"
+                                    sh "${mvnHome}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=zuul-api -Dsonar.projectName=zuul-api -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                         }
                     },
                     'python app': {
-                        script{
+                        script {
                             dir('wishlist-microservice-python') {
                                 def scannerHome = tool 'sonarscanner4';
                                 withSonarQubeEnv('sonar-pro') {

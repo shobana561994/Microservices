@@ -10,8 +10,7 @@ pipeline {
                 sh 'ls' // List files to verify checkout
             }
         }
-    }
-    stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 parallel (
                     'node application': {
@@ -77,4 +76,5 @@ pipeline {
                 )
             }
         }
+    }
 }

@@ -85,7 +85,7 @@ pipeline {
                           //  sh "docker login -u {shobana56it} -p {Shob@n@561994}"
                         
                         withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerPassword')]) {
-                            sh "docker login -u shobana56it -p Shob@n@561994"
+                            sh "docker login -u shobana56it -p ${dockerPassword}"
                         }
                     },
                     'ui-web-app-reactjs': {

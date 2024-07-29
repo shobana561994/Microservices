@@ -4,10 +4,10 @@ pipeline {
         SONARQUBE_TOKEN = 'sqa_2479a7ae3cf5d146bc7ed69a88f78e1ba06ab1a2'
     }
     stages {
-        stage('SCM Checkout'){
+        stage('SCM Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/shobana561994/Microservices.git'  
-                sh 'ls'
+                sh 'ls' // List files to verify checkout
             }
         }
         stage('SonarQube Analysis') {
@@ -73,7 +73,7 @@ pipeline {
                 )
             }
         }
-        stage ('Build Docker Image and push'){
+        stage ('Build Docker Image and Push') {
             steps {
                 parallel (
                     'docker login': {
@@ -82,7 +82,7 @@ pipeline {
                         }
                     },
                     'ui-web-app-reactjs': {
-                        dir('ui-web-app-reactjs'){
+                        dir('ui-web-app-reactjs') {
                             sh """
                             docker build -t shobana56it/ui:v1 .
                             docker push shobana56it/ui:v1
@@ -91,7 +91,7 @@ pipeline {
                         }
                     },
                     'zuul-api-gateway' : {
-                        dir('zuul-api-gateway'){
+                        dir('zuul-api-gateway') {
                             sh """
                             docker build -t shobana56it/api:v1 .
                             docker push shobana56it/api:v1
@@ -100,7 +100,7 @@ pipeline {
                         }
                     },
                     'offers-microservice-spring-boot': {
-                        dir('offers-microservice-spring-boot'){
+                        dir('offers-microservice-spring-boot') {
                             sh """
                             docker build -t shobana56it/spring:v1 .
                             docker push shobana56it/spring:v1
@@ -109,7 +109,7 @@ pipeline {
                         }
                     },
                     'shoes-microservice-spring-boot': {
-                        dir('shoes-microservice-spring-boot'){
+                        dir('shoes-microservice-spring-boot') {
                             sh """
                             docker build -t shobana56it/spring:v2 .
                             docker push shobana56it/spring:v2
@@ -118,7 +118,7 @@ pipeline {
                         }
                     },
                     'cart-microservice-nodejs': {
-                        dir('cart-microservice-nodejs'){
+                        dir('cart-microservice-nodejs') {
                             sh """
                             docker build -t shobana56it/ui:v2 .
                             docker push shobana56it/ui:v2
@@ -127,7 +127,7 @@ pipeline {
                         }
                     },
                     'wishlist-microservice-python': {
-                        dir('wishlist-microservice-python'){
+                        dir('wishlist-microservice-python') {
                             sh """
                             docker build -t shobana56it/python:v1 .
                             docker push shobana56it/python:v1
@@ -138,8 +138,8 @@ pipeline {
                 )
             }
         }
-        stage ('Deploy on k8s'){
-            steps{
+        stage ('Deploy on k8s') {
+            steps {
                 parallel (
                     'deploy on k8s': {
                         script {

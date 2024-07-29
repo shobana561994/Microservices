@@ -76,8 +76,7 @@ pipeline {
                 )
             }
         }
-    }
-    stage ('Build Docker Image and Push') {
+        stage ('Build Docker Image and Push') {
             steps {
                 parallel (
                     'docker login': {
@@ -143,3 +142,4 @@ pipeline {
             }
         }
     }
+}

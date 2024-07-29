@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         SONARQUBE_TOKEN = 'sqa_2479a7ae3cf5d146bc7ed69a88f78e1ba06ab1a2'
+        PATH = "/opt/maven/bin:$PATH" // Add Maven to the PATH
     }
     stages {
         stage('SCM Checkout') {

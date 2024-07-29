@@ -92,15 +92,15 @@ pipeline {
                         dir('ui-web-app-reactjs') {
                             sh """
                             docker build -t shobana56it/ui:v1 .
-                            docker push shobana56it/ui:v1 .
-                            docker rmi shobana56it/ui:v1 .
+                            docker push shobana56it/ui:v1 
+                            docker rmi shobana56it/ui:v1 
                             """
                         }
                     },
                     'zuul-api-gateway' : {
                         dir('zuul-api-gateway') {
                             sh """
-                            docker build -t shobana56it/api:v1 
+                            docker build -t shobana56it/api:v1 .
                             docker push shobana56it/api:v1
                             docker rmi shobana56it/api:v1
                             """
@@ -109,7 +109,7 @@ pipeline {
                     'offers-microservice-spring-boot': {
                         dir('offers-microservice-spring-boot') {
                             sh """
-                            docker build -t shobana56it/spring:v1 
+                            docker build -t shobana56it/spring:v1 .
                             docker push shobana56it/spring:v1
                             docker rmi shobana56it/spring:v1
                             """
@@ -118,7 +118,7 @@ pipeline {
                     'shoes-microservice-spring-boot': {
                         dir('shoes-microservice-spring-boot') {
                             sh """
-                            docker build -t shobana56it/spring:v2
+                            docker build -t shobana56it/spring:v2 .
                             docker push shobana56it/spring:v2
                             docker rmi shobana56it/spring:v2
                             """
@@ -127,7 +127,7 @@ pipeline {
                     'cart-microservice-nodejs': {
                         dir('cart-microservice-nodejs') {
                             sh """
-                            docker build -t shobana56it/ui:v2
+                            docker build -t shobana56it/ui:v2 .
                             docker push shobana56it/ui:v2
                             docker rmi shobana56it/ui:v2
                             """
@@ -136,7 +136,7 @@ pipeline {
                     'wishlist-microservice-python': {
                         dir('wishlist-microservice-python') {
                             sh """
-                            docker build -t shobana56it/python:v1
+                            docker build -t shobana56it/python:v1 .
                             docker push shobana56it/python:v1
                             docker rmi shobana56it/python:v1
                             """

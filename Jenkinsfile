@@ -34,21 +34,21 @@ pipeline {
                         script {
                             dir('offers-microservice-spring-boot') {
                                 sh 'which mvn' // Check if mvn is in the PATH
-                                sh '/opt/maven/bin/mvn -version' // Print Maven version to ensure it's found
+                                sh '/usr/bin/mvn -version' // Print Maven version to ensure it's found
                                 withSonarQubeEnv('sonar-pro') {
                                     sh "/opt/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=offers-spring-boot -Dsonar.projectName=offers-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                             dir('shoes-microservice-spring-boot') {
                                 sh 'which mvn' // Check if mvn is in the PATH
-                                sh '/opt/maven/bin/mvn -version' // Print Maven version to ensure it's found
+                                sh '/usr/bin/mvn -version' // Print Maven version to ensure it's found
                                 withSonarQubeEnv('sonar-pro') {
                                     sh "/opt/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=shoe-spring-boot -Dsonar.projectName=shoes-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                             dir('zuul-api-gateway') {
                                 sh 'which mvn' // Check if mvn is in the PATH
-                                sh '/opt/maven/bin/mvn -version' // Print Maven version to ensure it's found
+                                sh '/usr/bin/mvn -version' // Print Maven version to ensure it's found
                                 withSonarQubeEnv('sonar-pro') {
                                     sh "/opt/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=zuul-api -Dsonar.projectName=zuul-api -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }

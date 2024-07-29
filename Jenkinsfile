@@ -2,16 +2,12 @@ pipeline {
     agent any
     environment {
         SONARQUBE_TOKEN = 'sqa_2479a7ae3cf5d146bc7ed69a88f78e1ba06ab1a2'
-        MAVEN_HOME = '/opt/maven' // Explicitly set the Maven home path
-        PATH = "${MAVEN_HOME}/bin:$PATH" // Add Maven to the PATH
     }
     stages {
         stage('SCM Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/shobana561994/Microservices.git'  
+                git branch: 'main', url: 'https://github.com/shobana561994/Microservices.git'
                 sh 'ls' // List files to verify checkout
-                sh 'echo $PATH' // Print the PATH variable
-                sh 'which mvn' // Verify if Maven is in the PATH
             }
         }
         stage('SonarQube Analysis') {
@@ -37,23 +33,23 @@ pipeline {
                         script {
                             dir('offers-microservice-spring-boot') {
                                 sh 'which mvn' // Check if mvn is in the PATH
-                                sh "${MAVEN_HOME}/bin/mvn -version" // Print Maven version to ensure it's found
+                                sh '/opt/maven/bin/mvn -version' // Print Maven version to ensure it's found
                                 withSonarQubeEnv('sonar-pro') {
-                                    sh "${MAVEN_HOME}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=offers-spring-boot -Dsonar.projectName=offers-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
+                                    sh "/opt/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=offers-spring-boot -Dsonar.projectName=offers-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                             dir('shoes-microservice-spring-boot') {
                                 sh 'which mvn' // Check if mvn is in the PATH
-                                sh "${MAVEN_HOME}/bin/mvn -version" // Print Maven version to ensure it's found
+                                sh '/opt/maven/bin/mvn -version' // Print Maven version to ensure it's found
                                 withSonarQubeEnv('sonar-pro') {
-                                    sh "${MAVEN_HOME}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=shoe-spring-boot -Dsonar.projectName=shoes-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
+                                    sh "/opt/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=shoe-spring-boot -Dsonar.projectName=shoes-spring-boot -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                             dir('zuul-api-gateway') {
                                 sh 'which mvn' // Check if mvn is in the PATH
-                                sh "${MAVEN_HOME}/bin/mvn -version" // Print Maven version to ensure it's found
+                                sh '/opt/maven/bin/mvn -version' // Print Maven version to ensure it's found
                                 withSonarQubeEnv('sonar-pro') {
-                                    sh "${MAVEN_HOME}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=zuul-api -Dsonar.projectName=zuul-api -Dsonar.login=${env.SONARQUBE_TOKEN}"
+                                    sh "/opt/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=zuul-api -Dsonar.projectName=zuul-api -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
                             }
                         }

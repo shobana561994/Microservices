@@ -22,7 +22,7 @@ pipeline {
                                 }
                             }
                             dir('ui-web-app-reactjs') {
-                                def scannerHome = tool 'sonarscanner4';
+                                def scannerHome = tool 'sonarscanner4'
                                 withSonarQubeEnv('sonar-pro') {
                                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ui-reactjs -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
@@ -57,7 +57,7 @@ pipeline {
                     'python app': {
                         script {
                             dir('wishlist-microservice-python') {
-                                def scannerHome = tool 'sonarscanner4';
+                                def scannerHome = tool 'sonarscanner4'
                                 withSonarQubeEnv('sonar-pro') {
                                     sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarscanner4/bin/sonar-scanner \
                                     -D sonar.projectVersion=1.0-SNAPSHOT \
@@ -80,7 +80,7 @@ pipeline {
             steps {
                 parallel (
                     'docker login': {
-                            withCredentials([usernamePassword(credentialsId: 'dockerPass', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        withCredentials([usernamePassword(credentialsId: 'dockerPass', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                             sh "docker login -u shobana56it -p Shob@n@561994"
                         }
                     },
@@ -141,13 +141,13 @@ pipeline {
                 )
             }
         }
-      stage ('Deploy on k8s'){
-            steps{
+        stage ('Deploy on k8s') {
+            steps {
                 parallel (
                     'deploy on k8s': {
                         script {
                             withKubeCredentials(kubectlCredentials: [[ credentialsId: 'k8s', namespace: 'ms' ]]) {
-                                sh 'kubectl get ns' 
+                                sh 'kubectl get ns'
                                 sh 'kubectl apply -f kubernetes/yamlfile'
                             }
                         }

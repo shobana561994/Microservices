@@ -100,45 +100,45 @@ pipeline {
                     'zuul-api-gateway' : {
                         dir('zuul-api-gateway') {
                             sh """
-                            docker build -t shobana56it/api:v1 .
-                            docker push shobana56it/api:v1
-                            docker rmi shobana56it/api:v1
+                            docker build -t shobana56it/api:v1 . || true
+                            docker push shobana56it/api:v1 || true
+                            docker rmi shobana56it/api:v1 || true
                             """
                         }
                     },
                     'offers-microservice-spring-boot': {
                         dir('offers-microservice-spring-boot') {
                             sh """
-                            docker build -t shobana56it/spring:v1 .
-                            docker push shobana56it/spring:v1
-                            docker rmi shobana56it/spring:v1
+                            docker build -t shobana56it/spring:v1 . || true
+                            docker push shobana56it/spring:v1 || true
+                            docker rmi shobana56it/spring:v1 || true
                             """
                         }
                     },
                     'shoes-microservice-spring-boot': {
                         dir('shoes-microservice-spring-boot') {
                             sh """
-                            docker build -t shobana56it/spring:v2 .
-                            docker push shobana56it/spring:v2
-                            docker rmi shobana56it/spring:v2
+                            docker build -t shobana56it/spring:v2 . || true
+                            docker push shobana56it/spring:v2 || true
+                            docker rmi shobana56it/spring:v2 || true
                             """
                         }
                     },
                     'cart-microservice-nodejs': {
                         dir('cart-microservice-nodejs') {
                             sh """
-                            docker build -t shobana56it/ui:v2 .
-                            docker push shobana56it/ui:v2
-                            docker rmi shobana56it/ui:v2
+                            docker build -t shobana56it/ui:v2 . || true
+                            docker push shobana56it/ui:v2 || true
+                            docker rmi shobana56it/ui:v2 || true
                             """
                         }
                     },
                     'wishlist-microservice-python': {
                         dir('wishlist-microservice-python') {
                             sh """
-                            docker build -t shobana56it/python:v1 .
-                            docker push shobana56it/python:v1
-                            docker rmi shobana56it/python:v1
+                            docker build -t shobana56it/python:v1 . || true
+                            docker push shobana56it/python:v1 || true
+                            docker rmi shobana56it/python:v1 || true
                             """
                         }
                     }

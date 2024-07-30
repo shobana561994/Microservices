@@ -22,7 +22,7 @@ pipeline {
                                 }
                             }
                             dir('ui-web-app-reactjs') {
-                                def scannerHome = tool 'sonarscanner4'
+                                def scannerHome = tool 'sonarscanner4';
                                 withSonarQubeEnv('sonar-pro') {
                                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=ui-reactjs -Dsonar.login=${env.SONARQUBE_TOKEN}"
                                 }
@@ -57,7 +57,7 @@ pipeline {
                     'python app': {
                         script {
                             dir('wishlist-microservice-python') {
-                                def scannerHome = tool 'sonarscanner4'
+                                def scannerHome = tool 'sonarscanner4';
                                 withSonarQubeEnv('sonar-pro') {
                                     sh """/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarscanner4/bin/sonar-scanner \
                                     -D sonar.projectVersion=1.0-SNAPSHOT \
@@ -81,14 +81,18 @@ pipeline {
                 parallel (
                     'docker login': {
                         withCredentials([usernamePassword(credentialsId: 'dockerPass', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                            sh "docker login -u shobana56it -p Shob@n@561994"
+                            sh "echo 'Logging into Docker...'"
+                            sh "docker login -u shobana56it -p Shob@n@561994 || true"
                         }
                     },
                     'ui-web-app-reactjs': {
                         dir('ui-web-app-reactjs') {
                             sh """
+                            echo 'Building Docker image for UI...'
                             docker build -t shobana56it/ui:v1 . || true
+                            echo 'Pushing Docker image for UI...'
                             docker push shobana56it/ui:v1 || true
+                            echo 'Removing Docker image for UI...'
                             docker rmi shobana56it/ui:v1 || true
                             """
                         }
@@ -96,8 +100,11 @@ pipeline {
                     'zuul-api-gateway' : {
                         dir('zuul-api-gateway') {
                             sh """
+                            echo 'Building Docker image for Zuul API Gateway...'
                             docker build -t shobana56it/api:v1 . || true
+                            echo 'Pushing Docker image for Zuul API Gateway...'
                             docker push shobana56it/api:v1 || true
+                            echo 'Removing Docker image for Zuul API Gateway...'
                             docker rmi shobana56it/api:v1 || true
                             """
                         }
@@ -105,8 +112,11 @@ pipeline {
                     'offers-microservice-spring-boot': {
                         dir('offers-microservice-spring-boot') {
                             sh """
+                            echo 'Building Docker image for Offers Microservice...'
                             docker build -t shobana56it/spring:v1 . || true
+                            echo 'Pushing Docker image for Offers Microservice...'
                             docker push shobana56it/spring:v1 || true
+                            echo 'Removing Docker image for Offers Microservice...'
                             docker rmi shobana56it/spring:v1 || true
                             """
                         }
@@ -114,8 +124,11 @@ pipeline {
                     'shoes-microservice-spring-boot': {
                         dir('shoes-microservice-spring-boot') {
                             sh """
+                            echo 'Building Docker image for Shoes Microservice...'
                             docker build -t shobana56it/spring:v2 . || true
+                            echo 'Pushing Docker image for Shoes Microservice...'
                             docker push shobana56it/spring:v2 || true
+                            echo 'Removing Docker image for Shoes Microservice...'
                             docker rmi shobana56it/spring:v2 || true
                             """
                         }
@@ -123,8 +136,11 @@ pipeline {
                     'cart-microservice-nodejs': {
                         dir('cart-microservice-nodejs') {
                             sh """
+                            echo 'Building Docker image for Cart Microservice...'
                             docker build -t shobana56it/ui:v2 . || true
+                            echo 'Pushing Docker image for Cart Microservice...'
                             docker push shobana56it/ui:v2 || true
+                            echo 'Removing Docker image for Cart Microservice...'
                             docker rmi shobana56it/ui:v2 || true
                             """
                         }
@@ -132,8 +148,11 @@ pipeline {
                     'wishlist-microservice-python': {
                         dir('wishlist-microservice-python') {
                             sh """
+                            echo 'Building Docker image for Wishlist Microservice...'
                             docker build -t shobana56it/python:v1 . || true
+                            echo 'Pushing Docker image for Wishlist Microservice...'
                             docker push shobana56it/python:v1 || true
+                            echo 'Removing Docker image for Wishlist Microservice...'
                             docker rmi shobana56it/python:v1 || true
                             """
                         }

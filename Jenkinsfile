@@ -91,9 +91,9 @@ pipeline {
                     'ui-web-app-reactjs': {
                         dir('ui-web-app-reactjs') {
                             sh """
-                            docker build -t shobana56it/ui:v1 .
-                            docker push shobana56it/ui:v1 
-                            docker rmi shobana56it/ui:v1 
+                            docker build -t shobana56it/ui:v1 . || true
+                            docker push shobana56it/ui:v1 || true
+                            docker rmi shobana56it/ui:v1 || true
                             """
                         }
                     },

@@ -81,7 +81,7 @@ pipeline {
                 parallel (
                     'docker login': {
                         
-                        withCredentials([usernamePassword(credentialsId: 'dockerpass', usernameVariable: 'shobana56it', passwordVariable: 'Shob@n@561994')]) {
+                        withCredentials([usernamePassword(credentialsId: 'dockerPass', usernameVariable: 'shobana56it', passwordVariable: 'Shob@n@561994')]) {
                             sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                         
                         //withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerPassword')]) {

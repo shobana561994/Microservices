@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: "cart"
-        image:  bhagaths/ui:v2
+        image:  shobana56it/ui:v2
         imagePullPolicy: Always
         ports:
         - containerPort:  1004

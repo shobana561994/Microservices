@@ -1,10 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  "zuul-api"
+  name: "zuul-api"
   namespace: ms
   labels:
-    app:  "zuul-api"
+    app: "zuul-api"
+  annotations:
+    last-updated: "2024-08-17"  # Date of last update
 spec:
   selector:
     matchLabels:
@@ -18,14 +20,14 @@ spec:
   template:
     metadata:
       labels:
-        app:  "zuul-api"
+        app: "zuul-api"
     spec:
       containers:
-      - name:  "zuul-api"
-        image:  shobana56it/api:v1
+      - name: "zuul-api"
+        image: shobana56it/api:v1
         ports:
         - containerPort: 9999
-          name:  "zuul-api"
+          name: "zuul-api"
       imagePullSecrets:
       - name: javapipe
       affinity:
@@ -44,6 +46,8 @@ kind: Service
 metadata:
   name: "zuul-api"
   namespace: ms
+  annotations:
+    last-updated: "2024-08-17"  # Date of last update
 spec:
   selector:
     app: "zuul-api"

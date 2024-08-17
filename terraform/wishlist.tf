@@ -23,7 +23,7 @@ resource "kubernetes_deployment" "wishlist" {
       }
       spec {
         container {
-          image = "comdevops/python:v1"
+          image = "shobana56it/python:v1"
           name  = "wishlist"
           port {
             container_port = 5000

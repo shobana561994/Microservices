@@ -23,7 +23,7 @@ resource "kubernetes_deployment" "react-ui" {
       }
       spec {
         container {
-          image = "comdevops/ui:v1"
+          image = "shobana56it/ui:v1"
           name  = "react-ui"
           port {
             container_port = 8080

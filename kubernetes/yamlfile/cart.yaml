@@ -22,14 +22,11 @@ spec:
     spec:
       containers:
       - name: "cart"
-        image: shobana56it/ui:v2
+        image:  bhagaths/ui:v2
         imagePullPolicy: Always
         ports:
-        - containerPort: 1004
+        - containerPort:  1004
           name: "cart"
-      imagePullSecrets:
-      - name: regcred  # Ensure this matches the name of your Docker registry secret
-
 ---
 apiVersion: v1
 kind: Service
